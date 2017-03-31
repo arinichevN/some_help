@@ -1,0 +1,17 @@
+#
+git remote -v
+
+git remote add origin https://github.com/arinichevN/gwu22.git
+
+#send to branch master to server origin
+git push origin master
+git push -f origin master
+
+# looks at the working tree and adds all those paths to the staged changes if they are either changed or are new and not ignored, it does not stage any 'rm' actions.
+git add .
+
+#looks at all the already tracked files and stages the changes to those files if they are different or if they have been removed. It does not add any new files, it only stages changes to already tracked files.
+git add -u
+
+#git add .; git add -u
+git add -A

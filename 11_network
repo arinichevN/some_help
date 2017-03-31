@@ -1,0 +1,46 @@
+
+nano /etc/network/interfaces
+#static:
+iface eth0 inet static 
+address 192.168.0.104 
+netmask 255.255.255.0 
+gateway 192.168.0.254
+dns-nameservers 192.168.0.254 8.8.8.8
+auto eth0
+
+iface eth0 inet static 
+address 192.168.0.104 
+netmask 255.255.255.0 
+auto eth0
+ 
+#dynamic
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+ifup eth0
+ifdown eth0
+
+#NetworkManager
+
+#show active connection
+nmcli con show -a
+
+#show connectionsq
+ifconfig -a
+ip a
+
+=============#NETWORK MANAGER
+#info
+nmcli connection show
+
+#create connection
+nmcli connection add type ethernet autoconnect yes con-name con1 ifname eth0 ip4 192.168.0.103/24
+
+
+nmcli connection add type ethernet autoconnect yes con-name dyn1 ifname eth0
+
+nmcli con mod con1 connection.autoconnect yes
+
+nmcli con up static2
+nmcli con down static2

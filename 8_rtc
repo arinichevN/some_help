@@ -1,0 +1,13 @@
+sudo su
+i2cdetect -y 2
+echo ds3231 0x68 > /sys/class/i2c-adapter/i2c-2/new_device
+/*Write the system time to file in /dev/rtc1*/
+hwclock -w -f /dev/rtc0
+/*Read the time in /dev/rtc1*/
+hwclock -e -f /dev/rtc1
+/*Read the time in /dev/rtc1 and write the system time to file as well.*/
+hwclock -s -f /dev/rtc1
+
+
+
+

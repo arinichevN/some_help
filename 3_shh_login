@@ -1,0 +1,4 @@
+//ip adress: 192.168.1.3 (connection method: automatic DHCP)
+ sudo nmap -sS 192.168.1.* //searching banana ip address
+ssh bananapi@192.168.1.3 
+exit //logout from ssh

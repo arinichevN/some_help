@@ -1,0 +1,22 @@
+#! /bin/sh
+# /etc/init.d/controller-switch
+#
+
+case "$1" in
+  start)
+    echo "Starting controller-switch: "
+    start-stop-daemon --start --oknodo --name controller-switch --pidfile /var/run/controller-switch.pid --exec /usr/sbin/controller-switch --chuid user1
+    ;;
+  stop)
+    echo "Stopping controller-switch: "
+    start-stop-daemon --stop --oknodo --name controller-switch --pidfile /var/run/controller-switch.pid --retry 5
+    ;;
+  *)
+    echo "Usage: /etc/init.d/controller-switch {start|stop}"
+    exit 1
+    ;;
+esac
+exit 0
+-----------------------------------------------------------------------------------
+sudo chmod 755 controller-switch
+update-rc.d controller-switch defaults

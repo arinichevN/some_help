@@ -1,0 +1,65 @@
+#!/bin/bash
+apt-get update
+apt-get install i2c-tools apache2 php5 postgresql postgresql-contrib php5-pgsql libpq-dev git
+apt-get install i2c-tools apache2 php libapache2-mod-php postgresql postgresql-contrib php-pgsql libpq-dev git
+apt-get install sqlite3 libsqlite3-dev apache2 php libapache2-mod-php php-pgsql php7.0-sqlite3
+apt-get install php libapache2-mod-php php-pgsql php7.0-sqlite3
+apt-get install sqlite3 libsqlite3-dev
+apt-get install php5 php5-common php5-pgsql libapache2-mod-php5 php5-sqlite
+apt-get install minicom
+
+git clone https://github.com/LeMaker/WiringBP -b bananapi
+cd WiringBP/
+sudo chmod +x ./build
+sudo ./build
+
+
+#lighttpd
+sudo apt-get install lighttpd php5-cgi
+sudo lighty-enable-mod fastcgi 
+sudo lighty-enable-mod fastcgi-php
+sudo service lighttpd force-reload
+
+#ssh sftp
+when you cannot login as root:
+Change this line in nano /etc/ssh/sshd_config:
+PermitRootLogin without-password
+to
+PermitRootLogin yes
+And restart the SSH server:
+sudo service ssh restart
+
+#apache
+nano /etc/apache2/apache2.conf
+KeepAlive off
+
+#php
+nano /etc/php5/apache2/php.ini
+nano /etc/php/7.0/apache2/php.ini
+
+#comment swap partition in
+/etc/fstab
+#ord
+#add line
+vm.swappiness=1
+#in file
+nano /etc/sysctl.conf
+#this will limit swapping
+
+#RTC
+#info
+dmesg | grep -i rtc
+ls -l /dev/rtc*
+hwclock --test -D
+#set timezone and date
+cd /etc && ln -sf /usr/share/zoneinfo/Europe/Moscow localtime
+date -s '2017-03-31 07:05:00'
+date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"
+
+#add this line to nano /etc/fstab to mount drive
+/dev/sdb1	/media/sdb1	ext4	user	0	0
+#or command at startup
+mount -t ext4 /dev/sda1 /media/bb_control
+
+#check serial port
+dmesg | grep -E 'uart|serial'

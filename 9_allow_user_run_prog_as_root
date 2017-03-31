@@ -1,0 +1,12 @@
+
+Allow the www-data user to run to run program1 and program2 with no password:
+
+sudo visudo
+
+Add to the contents of the sudoers file:
+
+User_Alias WWW_USER = www-data
+Cmnd_Alias WWW_COMMANDS = /sbin/program1, /sbin/program2
+WWW_USER ALL = (ALL) NOPASSWD: WWW_COMMANDS
+
+Save.

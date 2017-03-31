@@ -1,0 +1,13 @@
+ssh bananapi@192.168.1.250
+ls
+cd
+nano
+man
+exit
+
+sftp bananapi@192.168.1.250
+ put gwu74.tar.gz
+ (l)cd
+ (l)ls
+ (l)pwd
+shutdown -P now

@@ -1,0 +1,36 @@
+#lighttpd
+sudo apt-get install lighttpd php5-cgi
+
+#Enable the fastcgi module and the php configuration with
+sudo lighty-enable-mod fastcgi 
+sudo lighty-enable-mod fastcgi-php
+
+#Reload the lighttpd daemon
+sudo update-rc.d lighttpd defaults
+sudo service lighttpd force-reload
+
+#Verify that lighttpd is running:
+netstat -ntulp
+
+#config file
+nano /etc/lighttpd/lighttpd.conf 
+
+#error log
+nano /var/log/lighttpd/error.log
+
+
+down vote
+accepted
+	
+
+#Test config:
+/usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -t
+
+#Run foreground(for debug):
+/usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -D
+
+#debug
+sudo strace -ff /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf
+
+
+

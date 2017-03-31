@@ -1,0 +1,31 @@
+SHOW config_file;
+SHOW hba_file;
+sudo nano /etc/postgresql/9.3/main/postgresql.conf //make: listen_addresses = '*'   
+sudo nano /etc/postgresql/9.3/main/pg_hba.conf //authentication
+/*
+ * add this row to pg_hgb.conf and then restart server
+ * host    control             postgres        all            md5
+ */
+sudo /etc/init.d/postgresql restart //full restart (when postgresql.conf altered)
+#sudo service postgresql restart //apply changes
+#sudo kill -HUP <pid>
+#sudo /etc/init.d/postgresql reload
+
+sudo -u postgres psql postgres //login
+\password postgres //new password
+ CREATE DATABASE control TEMPLATE template0 ENCODING='UTF8';
+
+CREATE TABLESPACE fastspace LOCATION '/media/user1/bb_log';
+
+sudo su - postgres
+initdb -D /media/user1/bb_log
+
+#sudo -u postgres psql
+#CREATE ROLE bananapi PASSWORD 'db198259b9ef2a739fb6eb7138eed2d6' SUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
+sudo -u postgres createdb -O postgres control
+sudo -u bananapi psql irrigation //connect to db
+/* read commands from file */
+sudo -u postgres psql -d control -f /home/user1/Desktop/SQL/pin/make_pro.sql -h localhost
+
+sudo apt-get install php5-pgsql
+sudo apt-get install libpq-dev

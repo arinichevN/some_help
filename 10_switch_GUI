@@ -1,0 +1,4 @@
+#disable
+update-rc.d -f lightdm remove
+#enable
+update-rc.d -f lightdm defaults

@@ -1,0 +1,21 @@
+
+fdisk -l //find card name
+
+
+sync && umount -v /dev/sdb1; umount -v /dev/sdb2;
+umount /dev/mmcblk0p1; umount /dev/mmcblk0p2;
+
+dd if=/home/user1/banana/init/OS/2016-07-10-ubuntu-16.04-xenial-minimal-preview-bpi-m1-m1p-r1.img of=/dev/sdb && sync
+dd if=/home/user1/banana/init/OS/bananian-1508.img of=/dev/sdb && sync
+dd if=/home/user1/banana/init/OS/m1/2016-07-21-ubuntu-mate-16.04-desktop-armhf-raspberry-pi-bpi-m1-m1p-r1-sd-emmc.img of=/dev/sdb && sync
+dd if=/home/user1/banana/init/OS/my/lubuntu_switch.img of=/dev/mmcblk0 && sync
+~$ sudo pkill -USR1 -n -x dd //shows progress of command above
+//expand filesystem
+use gparted (GUI)
+
+#make img file
+#count = last End of fdisk -l
+dd if=/dev/sdb of=/home/user1/banana/init/OS/my/lubuntu_switch.img bs=512 count=5402630 && sync;
+dd if=/dev/sdb of=/home/user1/banana/init/OS/my/lubuntu_switch.img && sync;
+dd if=/dev/mmcblk0 of=/home/user1/banana/init/OS/my/lubuntu_switch.img && sync;
+gzip --best -c file1  > foo.gz
